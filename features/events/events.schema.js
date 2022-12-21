@@ -6,7 +6,7 @@ let eventsSchema = new mongoose.Schema({
     description : {type: String},
     limit : {type: Number, default: 1},
     start : {type: Date},
-    end : {type: Date},
+    end : {type: String},
     joined : {type: Array}
 })
 

@@ -1,12 +1,13 @@
-import {  Box, Button, Flex, FormLabel, Grid, Input, Textarea } from "@chakra-ui/react";
+import {  Box, Button, Flex, FormLabel, Grid, Input, Text, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createEvent } from "../Redux/events/events.actions";
 
 export default function CreateEvent(){
 
     const dispatch = useDispatch();
 
-    const [event, setEvent] = useState({});
+    const [event, setEvent] = useState();
 
     function handleData(e){
         const {name, value} = e.target;
@@ -14,11 +15,12 @@ export default function CreateEvent(){
     }
 
     function handleSubmit(){
-        
+        dispatch(createEvent(event));
     }
 
     return(
         <Flex flexDirection={"column"} w="600px" m={"50px auto"} gap="20px" > 
+            <Text textAlign={"left"} fontSize="2rem" textTransform={"uppercase"} mb="20px">Create Event:</Text>
             <Box>
                 <FormLabel>Event: </FormLabel>
                 <Input type={"text"} placeholder="Enter Event Title" name="title" onChange={handleData} />
@@ -56,7 +58,7 @@ export default function CreateEvent(){
                     </Flex>
                 </Grid>
             </Box>
-                <Button colorScheme={"teal"}>Create Event</Button>
+                <Button colorScheme={"teal"} onClick={handleSubmit}>Create Event</Button>
         </Flex>
     )
 }

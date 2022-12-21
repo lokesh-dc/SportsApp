@@ -3,6 +3,8 @@ import {
     EVENTS_FETCH_ERROR,
     EVENTS_FETCH_LOADING,
     EVENTS_FETCH_SUCCESS,
+    EVENT_ADD_LOADING,
+    EVENT_ADD_SUCCESS,
     FETCH_SINGLE_EVENT_LOADING,
     FETCH_SINGLE_EVENT_SUCCESS
 } from "./events.types"
@@ -28,3 +30,14 @@ export const fetchParticularEvent = (id) => async (dispatch) => {
     }
 }
 
+export const createEvent = (eventDetail) => async (dispatch) => {
+    dispatch({type: EVENT_ADD_LOADING});
+    console.log(eventDetail.start, eventDetail.end,eventDetail.end - eventDetail.start )
+    try{
+        await axios.post("http://localhost:8080/events", eventDetail).then((res)=> res).catch((e)=> e);
+        dispatch({type: EVENT_ADD_SUCCESS});
+        fetchEvents();
+    }catch(e){
+        dispatch({type: EVENTS_FETCH_ERROR, payload: e.response.data})
+    }
+}

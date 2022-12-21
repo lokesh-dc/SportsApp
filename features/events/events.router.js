@@ -6,7 +6,7 @@ const app = express.Router();
 
 app.get("/", async (req, res)=>{
     try{
-        let allEvents = await eventsModel.find();
+        let allEvents = await eventsModel.find().sort({start: -1});
         res.send(allEvents);
     }catch(e){
         res.status(500).send(e.message);
@@ -15,9 +15,9 @@ app.get("/", async (req, res)=>{
 
 
 app.post("/", async (req, res)=>{
-    let {title, date, description, limit, timings, joined  } = req.body;
+    let {title, start,end, description, limit, joined  } = req.body;
     try{
-        await eventsModel.create({title, date, limit, description, timings, joined});
+        await eventsModel.create({title, start,end, limit, description, joined});
         res.send("Event successfully created");
     }catch(e){
         res.status(500).send(e.message);
