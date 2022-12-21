@@ -9,7 +9,8 @@ import {
     AUTH_SIGNUP_SUCCESS,
     FETCH_USERDETAILS_LOADING,
     FETCH_USERDETAILS_ERROR,
-    FETCH_USERDETAILS_SUCCESS
+    FETCH_USERDETAILS_SUCCESS,
+    USER_LOGOUT
 } from "./auth.types"
 
 
@@ -47,4 +48,9 @@ export const fetchUserDetails = (id) => async (dispatch) => {
     }catch(e){
         dispatch({type: FETCH_USERDETAILS_ERROR, payload: e.response.data});
     }
+}
+
+
+export const userLogout = () =>{
+    return{type: USER_LOGOUT};
 }

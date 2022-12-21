@@ -19,15 +19,16 @@ export default function Navbar(){
         <Flex justifyContent={"space-between"} boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" px={"50px"} py="20px" fontWeight={"bold"}>
             <Link to="/">Playo App</Link>
             {
-                !isAuth ? 
+                isAuth && userDetails ?
+                <Flex alignItems={"center"} gap="30px">
+                    <Link to="/add_event"> Create Event</Link>
+                    <UserInteract userDetails={userDetails} />
+                </Flex> :  
                 <Flex justifyContent={"center"} gap="30px">
                     <Link to="/auth/signup">Signup</Link>
                     <Link>Events</Link>
-                </Flex> : 
-                <Flex alignItems={"center"} gap="30px">
-                    <Link to="/add_event"> Create Event</Link>
-                    <UserInteract />
-                </Flex>
+                </Flex> 
+                
             }
 
         </Flex>

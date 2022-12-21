@@ -34,9 +34,6 @@ export default function Login(){
                     isClosable: true,
                     duration: 3000,
                   })
-                setTimeout(()=>{
-                    navigate("/auth/login");
-                },1000)
             }
         }).catch((e)=> console.log(e))
     }

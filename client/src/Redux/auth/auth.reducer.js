@@ -7,7 +7,8 @@ import {
     AUTH_SIGNUP_SUCCESS,
     FETCH_USERDETAILS_LOADING,
     FETCH_USERDETAILS_ERROR,
-    FETCH_USERDETAILS_SUCCESS
+    FETCH_USERDETAILS_SUCCESS,
+    USER_LOGOUT
 } from "./auth.types"
 
 
@@ -77,6 +78,11 @@ export const authReducer = (state=initState, {type, payload}) => {
                 loading: false,
                 error: null,
                 userDetails : payload
+            }
+        case USER_LOGOUT :
+            return{
+                ...state,
+                ...initState
             }
         default : 
             return state;

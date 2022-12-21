@@ -11,3 +11,5 @@ export const AUTH_LOGIN_SUCCESS = "auth/login/success"
 export const FETCH_USERDETAILS_LOADING = "fetch/userdetails/loading"
 export const FETCH_USERDETAILS_ERROR = "fetch/userdetails/error"
 export const FETCH_USERDETAILS_SUCCESS = "fetch/userdetails/success"
+
+export const USER_LOGOUT = "user/logout"
