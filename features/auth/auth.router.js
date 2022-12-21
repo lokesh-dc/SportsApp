@@ -15,4 +15,14 @@ app.get("/", async (req, res)=>{
     }
 })
 
+app.post("/", async(req, res)=>{
+    const {userName, email, password } = req.body;
+    try{    
+        await authModel.create({userName, email, password});
+        res.send({status: true, message: "User successfully created"});
+    }catch(e){
+        res.status(500).send(e.message);
+    }
+})
+
 module.exports = app;
