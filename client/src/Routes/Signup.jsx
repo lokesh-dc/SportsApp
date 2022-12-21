@@ -56,7 +56,7 @@ export default function Signup(){
             </Box>
             {
                 error &&
-                <Text>{error}</Text>
+                <Text textAlign={"right"} color={"red"}>{error}</Text>
             }
             <Button onClick={handleSubmit} isLoading={loading} loadingText="Signing up">Sign up</Button>
         </Grid>

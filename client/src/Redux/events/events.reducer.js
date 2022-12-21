@@ -14,7 +14,7 @@ const initState = {
     data : []
 }
 
-export const authReducer = (state=initState, {type, payload}) => {
+export const eventReducer = (state=initState, {type, payload}) => {
     switch(type){
         case EVENTS_FETCH_LOADING:
             return{
