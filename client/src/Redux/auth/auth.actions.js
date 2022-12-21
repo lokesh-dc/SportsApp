@@ -1,3 +1,6 @@
+
+import axios from "axios"
+
 import {
     AUTH_LOGIN_LOADING,
     AUTH_LOGIN_ERROR,
@@ -8,3 +11,26 @@ import {
 } from "./auth.types"
 
 
+export const userSignup = (creds) => async (dispatch) => {
+    dispatch({type: AUTH_SIGNUP_LOADING});
+    try{
+        let response = await axios.post("http://localhost:8080/auth/signup", creds).then((res)=> res).then((e)=> e);
+        dispatch({type: AUTH_SIGNUP_SUCCESS});
+        return response.data;
+    }catch{
+        dispatch({type: AUTH_SIGNUP_ERROR})
+    }
+}
+
+export const userLogin = (creds) => async (dispatch) => {
+    dispatch({type: AUTH_LOGIN_LOADING});
+    try{
+        let response = await axios.post("http://localhost:8080/auth/login", creds).then((res)=> res).then((e)=> e);
+        dispatch({type: AUTH_LOGIN_SUCCESS, payload: response.data.userId});
+        // console.log(response);
+        return response.data;
+    }catch{
+        dispatch({type: AUTH_LOGIN_ERROR})
+    }
+
+}

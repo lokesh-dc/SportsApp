@@ -7,6 +7,6 @@ let authSchema = new mongoose.Schema({
     email : {type: String}
 })
 
-let authModel = mongoose.model("event",authSchema);
+let authModel = mongoose.model("user",authSchema);
 
 module.exports = authModel;

@@ -11,7 +11,8 @@ import {
 const initState = {
     loading : false,
     error : null,
-    data : []
+    isAuth : false,
+    userId : null
 }
 
 export const authReducer = (state=initState, {type, payload}) => {
@@ -33,6 +34,8 @@ export const authReducer = (state=initState, {type, payload}) => {
                 ...state,
                 loading: false,
                 error: null,
+                isAuth: true,
+                userId : payload
             }
         case AUTH_SIGNUP_LOADING:
             return{
