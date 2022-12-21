@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
+import EventDetails from "./EventDetails";
 import EventsPage from "./EventsPage";
 import Login from "./Login";
+import PrivateRouter from "./PrivateRouter";
 import Signup from "./Signup";
 
 export default function AllRouter(){
@@ -9,7 +11,8 @@ export default function AllRouter(){
             <Route path="/" element={<Login />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/signup" element={<Signup />} />
-            <Route path="/events" element={<EventsPage />} />
+            <Route path="/events" element={<PrivateRouter> <EventsPage /> </PrivateRouter>} />
+            <Route path="/events/:id" element={ <PrivateRouter> <EventDetails /> </PrivateRouter>} />
         </Routes>
     )
 }

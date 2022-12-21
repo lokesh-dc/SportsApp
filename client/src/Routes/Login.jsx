@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux"
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { userLogin } from "../Redux/auth/auth.actions";
 
 export default function Login(){
@@ -29,9 +29,10 @@ export default function Login(){
             if(res.status){
                 toast({
                     title: `Successfully Logged in.`,
-                    position: 'top-right',
+                    position: 'bottom-right',
                     status: 'success',
                     isClosable: true,
+                    duration: 3000,
                   })
                 setTimeout(()=>{
                     navigate("/auth/login");
@@ -40,7 +41,8 @@ export default function Login(){
         }).catch((e)=> console.log(e))
     }
     return(
-        <Grid> 
+        <Grid w={"500px"} margin="100px auto" boxShadow= "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" p={"50px"} gap="20px" >
+            <Text fontWeight={"bold"} textTransform="uppercase" fontSize={"2rem"} mb="10px">User Sign in</Text>
             <Box>
                 <FormLabel>Email:</FormLabel>
                 <Input type={"text"} placeholder="eample@mail.com" name="email" onChange={handleData} />
@@ -53,7 +55,10 @@ export default function Login(){
                 error &&
                 <Text textAlign={"right"} color={"red"}>{error}</Text>
             }
-            <Button isLoading={loading} onClick={handleSubmit}>Login</Button>
+            <Button isLoading={loading} onClick={handleSubmit} colorScheme="teal">Login</Button>
+            <Text>
+                Don't have an account? <Link to="/auth/signup">Sign up</Link>
+            </Text>
         </Grid>
     )
 }

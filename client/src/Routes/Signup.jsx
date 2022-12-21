@@ -2,7 +2,7 @@ import { Box, Button, FormLabel, Grid, Input, Text, useToast } from "@chakra-ui/
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { userSignup } from "../Redux/auth/auth.actions";
 
 export default function Signup(){
@@ -29,9 +29,10 @@ export default function Signup(){
             if(res.status){
                 toast({
                     title: `Account Successfully created.`,
-                    position: 'top-right',
+                    position: 'bottom-right',
                     status: 'success',
                     isClosable: true,
+                    duration: 3000,
                   })
                 setTimeout(()=>{
                     navigate("/auth/login");
@@ -41,7 +42,8 @@ export default function Signup(){
     }
 
     return(
-        <Grid>
+        <Grid w={"500px"} margin="100px auto" boxShadow= "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" p={"50px"} gap="20px" >
+            <Text fontWeight={"bold"} textTransform="uppercase" fontSize={"2rem"} mb="10px">User Sign up</Text>
             <Box>
                 <FormLabel>User Name:</FormLabel>
                 <Input type={"text"} placeholder="Enter User name" name="userName"  onChange={handleData} />
@@ -58,7 +60,10 @@ export default function Signup(){
                 error &&
                 <Text textAlign={"right"} color={"red"}>{error}</Text>
             }
-            <Button onClick={handleSubmit} isLoading={loading} loadingText="Signing up">Sign up</Button>
+            <Button colorScheme="teal" onClick={handleSubmit} isLoading={loading} loadingText="Signing up">Sign up</Button>
+            <Text>
+                Already have an account? <Link to="/auth/login">Sign in</Link>
+            </Text>
         </Grid>
     )
 }

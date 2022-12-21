@@ -1,13 +1,15 @@
 
 import axios from "axios"
-
 import {
     AUTH_LOGIN_LOADING,
     AUTH_LOGIN_ERROR,
     AUTH_LOGIN_SUCCESS,
     AUTH_SIGNUP_ERROR,
     AUTH_SIGNUP_LOADING,
-    AUTH_SIGNUP_SUCCESS
+    AUTH_SIGNUP_SUCCESS,
+    FETCH_USERDETAILS_LOADING,
+    FETCH_USERDETAILS_ERROR,
+    FETCH_USERDETAILS_SUCCESS
 } from "./auth.types"
 
 
@@ -35,5 +37,14 @@ export const userLogin = (creds) => async (dispatch) => {
     }catch(e){
         dispatch({type: AUTH_LOGIN_ERROR, payload:e.response.data.message})
     }
+}
 
+export const fetchUserDetails = (id) => async (dispatch) => {
+    dispatch({type:FETCH_USERDETAILS_LOADING});
+    try{
+        let response = await axios.get(`http://localhost:8080/auth/${id}`).then((res)=> res).catch((e)=> e);
+        dispatch({type: FETCH_USERDETAILS_SUCCESS, payload : response.data})
+    }catch(e){
+        dispatch({type: FETCH_USERDETAILS_ERROR, payload: e.response.data});
+    }
 }

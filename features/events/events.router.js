@@ -24,5 +24,15 @@ app.post("/", async (req, res)=>{
     }
 })
 
+app.get("/:id", async(req,res)=>{
+    let {id} = req.params;
+    console.log(id)
+    try{
+        let eventDetails = await eventsModel.findById(id);
+        res.send(eventDetails)
+    }catch(e){
+        res.status(500).send(e.message);
+    }
+})
 
 module.exports = app;

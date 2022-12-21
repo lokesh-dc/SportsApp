@@ -15,6 +15,16 @@ app.get("/", async (req, res)=>{
     }
 })
 
+app.get("/:id", async (req, res)=>{
+    let {id} = req.params;
+    try{
+        const userDetails = await authModel.findById(id);
+        res.send(userDetails);
+    }catch(e){
+        res.status(500).send(e.message);
+    }
+})
+
 app.post("/signup", async(req, res)=>{
     const {userName, email, password } = req.body;
     try{    
