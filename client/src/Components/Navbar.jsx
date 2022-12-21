@@ -16,7 +16,7 @@ export default function Navbar(){
 
 
     return(
-        <Flex justifyContent={"space-between"} boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" px={"50px"} py="20px" fontWeight={"bold"}>
+        <Flex justifyContent={"space-between"} alignItems="center" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" px={"50px"} py="20px" fontWeight={"bold"}>
             <Link to="/">Playo App</Link>
             {
                 isAuth && userDetails ?

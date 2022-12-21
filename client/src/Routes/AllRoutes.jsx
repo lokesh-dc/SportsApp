@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import CreateEvent from "./CreateEvent";
 import EventDetails from "./EventDetails";
 import EventsPage from "./EventsPage";
 import Login from "./Login";
@@ -13,6 +14,7 @@ export default function AllRouter(){
             <Route path="/auth/signup" element={<Signup />} />
             <Route path="/events" element={<PrivateRouter> <EventsPage /> </PrivateRouter>} />
             <Route path="/events/:id" element={ <PrivateRouter> <EventDetails /> </PrivateRouter>} />
+            <Route path="/add_event" element={ <PrivateRouter> <CreateEvent /> </PrivateRouter>} />
         </Routes>
     )
 }

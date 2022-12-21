@@ -5,8 +5,8 @@ let eventsSchema = new mongoose.Schema({
     title : { type: String, required : true},
     description : {type: String},
     limit : {type: Number, default: 1},
-    date : {type: Date},
-    timings : {type: Number},
+    start : {type: Date},
+    end : {type: Date},
     joined : {type: Array}
 })
 
