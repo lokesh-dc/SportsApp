@@ -18,6 +18,8 @@ export default function CreateEvent(){
         dispatch(createEvent(event));
     }
 
+    console.log(Event)
+
     return(
         <Flex flexDirection={"column"} w="600px" m={"50px auto"} gap="20px" > 
             <Text textAlign={"left"} fontSize="2rem" textTransform={"uppercase"} mb="20px">Create Event:</Text>

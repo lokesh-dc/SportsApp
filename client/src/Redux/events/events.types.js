@@ -11,3 +11,4 @@ export const EVENT_ADD_SUCCESS = "events/add/success"
 export const FETCH_SINGLE_EVENT_SUCCESS = "fetch/single/event/success"
 export const FETCH_SINGLE_EVENT_ERROR = "fetch/single/event/error"
 export const FETCH_SINGLE_EVENT_LOADING = "fetch/single/event/loading"
+

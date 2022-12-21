@@ -26,10 +26,28 @@ app.post("/", async (req, res)=>{
 
 app.get("/:id", async(req,res)=>{
     let {id} = req.params;
-    console.log(id)
     try{
-        let eventDetails = await eventsModel.findById(id);
+        let eventDetails = await eventsModel.findById(id).populate({
+            path : "waitlisted",
+            populate : [
+                { path : "user" }
+            ]
+        })
         res.send(eventDetails)
+    }catch(e){
+        res.status(500).send(e.message);
+    }
+})
+
+app.patch("/:id", async (req,res)=>{
+    let {id} = req.params;
+    let {userId} = req.body;
+    try{
+        let event = await eventsModel.findById(id);
+        let waitlist = event.waitlisted;
+        waitlist.push({user: userId})
+        await eventsModel.findByIdAndUpdate(id, {waitlisted: waitlist});
+        res.send("updated")
     }catch(e){
         res.status(500).send(e.message);
     }
