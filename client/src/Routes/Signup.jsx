@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Grid, Input, useToast } from "@chakra-ui/react";
+import { Box, Button, FormLabel, Grid, Input, Text, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -54,7 +54,11 @@ export default function Signup(){
                 <FormLabel>Password:</FormLabel>
                 <Input type={"password"} placeholder="Enter password" name="password" onChange={handleData} />
             </Box>
-            <Button onClick={handleSubmit}>Sign up</Button>
+            {
+                error &&
+                <Text>{error}</Text>
+            }
+            <Button onClick={handleSubmit} isLoading={loading} loadingText="Signing up">Sign up</Button>
         </Grid>
     )
 }

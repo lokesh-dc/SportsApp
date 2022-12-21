@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Grid, Input, useToast } from "@chakra-ui/react";
+import { Box, Button, FormLabel, Grid, Input, Text, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -14,7 +14,6 @@ export default function Login(){
     const [formData, setFormData] = useState({});
     const toast = useToast();
 
-    console.log(loading, error, isAuth)
     useEffect(()=>{
         if(isAuth){
             return navigate("/events");
@@ -38,7 +37,7 @@ export default function Login(){
                     navigate("/auth/login");
                 },1000)
             }
-        })
+        }).catch((e)=> console.log(e))
     }
     return(
         <Grid> 
@@ -50,7 +49,11 @@ export default function Login(){
                 <FormLabel>Password:</FormLabel>
                 <Input type={"password"} placeholder="Enter password" name="password" onChange={handleData} />
             </Box>
-            <Button onClick={handleSubmit}>Login</Button>
+            {
+                error &&
+                <Text textAlign={"right"} color={"red"}>{error}</Text>
+            }
+            <Button isLoading={loading} onClick={handleSubmit}>Login</Button>
         </Grid>
     )
 }
