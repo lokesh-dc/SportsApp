@@ -15,9 +15,9 @@ app.get("/", async (req, res)=>{
 
 
 app.post("/", async (req, res)=>{
-    let {title, start,end, description, limit, joined  } = req.body;
+    let {createdBy,title, start,end, description, limit, joined  } = req.body;
     try{
-        await eventsModel.create({title, start,end, limit, description, joined});
+        await eventsModel.create({createdBy,title, start,end, limit, description, joined});
         res.send("Event successfully created");
     }catch(e){
         res.status(500).send(e.message);

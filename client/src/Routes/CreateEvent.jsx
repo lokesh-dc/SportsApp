@@ -1,13 +1,13 @@
 import {  Box, Button, Flex, FormLabel, Grid, Input, Text, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../Redux/events/events.actions";
 
 export default function CreateEvent(){
 
     const dispatch = useDispatch();
-
-    const [event, setEvent] = useState();
+    const {userDetails} = useSelector((store)=> store.auth);
+    const [event, setEvent] = useState({createdBy : userDetails.userName});
 
     function handleData(e){
         const {name, value} = e.target;
