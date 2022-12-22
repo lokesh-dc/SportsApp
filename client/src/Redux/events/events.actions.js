@@ -11,10 +11,10 @@ import {
 } from "./events.types"
 
 
-export const fetchEvents = () => async (dispatch) => {
+export const fetchEvents = ({sort=1, city=""}) => async (dispatch) => {
     dispatch({type: EVENTS_FETCH_LOADING});
     try{
-        const response = await axios.get("http://localhost:8080/events").then((res)=> res).catch((e)=> e);
+        const response = await axios.get(`http://localhost:8080/events?sort=${sort}&city=${city}`).then((res)=> res).catch((e)=> e);
         dispatch({type: EVENTS_FETCH_SUCCESS, payload: response.data});
     }catch(e){
         dispatch({type: EVENTS_FETCH_ERROR, payload: e.response.data.message});
@@ -34,11 +34,11 @@ export const fetchParticularEvent = (id) => async (dispatch) => {
 export const createEvent = (eventDetail) => async (dispatch) => {
     dispatch({type: EVENT_ADD_LOADING});
     try{
-        await axios.post("http://localhost:8080/events", eventDetail).then((res)=> res).catch((e)=> e);
+        await axios.post("http://localhost:8080/events", eventDetail).then((res)=> res).catch((e)=> console.log(e));
         dispatch({type: EVENT_ADD_SUCCESS});
         fetchEvents();
     }catch(e){
-        dispatch({type: EVENTS_FETCH_ERROR, payload: e.response.data})
+        dispatch({type: EVENTS_FETCH_ERROR, payload: e.response})
     }
 }
 

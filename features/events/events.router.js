@@ -5,8 +5,15 @@ const eventsModel = require("./events.schema");
 const app = express.Router();
 
 app.get("/", async (req, res)=>{
+    const {sort, city} = req.query;
     try{
-        let allEvents = await eventsModel.find().sort({start: -1});
+        let allEvents;
+        if(city===""){
+            allEvents = await eventsModel.find().sort({startDate: sort});
+        }
+        else
+            allEvents = await eventsModel.find({city}).sort({startDate: sort});
+        
         res.send(allEvents);
     }catch(e){
         res.status(500).send(e.message);
@@ -15,10 +22,10 @@ app.get("/", async (req, res)=>{
 
 
 app.post("/", async (req, res)=>{
-    let {createdBy,title, start,end, description, limit, joined  } = req.body;
+    let {createdBy,title,startTime,startDate ,endDate ,endTime, description, limit, joined, city  } = req.body;
     limit = +limit;
     try{
-        await eventsModel.create({createdBy,title, start,end, limit, description, joined});
+        await eventsModel.create({createdBy,title, startTime,startDate ,endDate ,endTime, limit, description, joined, city});
         res.send("Event successfully created");
     }catch(e){
         res.status(500).send(e.message);

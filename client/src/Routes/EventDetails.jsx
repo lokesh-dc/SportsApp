@@ -21,26 +21,19 @@ export default function EventDetails(){
         await dispatch(joinEvent({id,userId}))
         dispatch(fetchParticularEvent(id));
     }
-    const [show, setShow ] = useState(false);
     const [hasJoined, setHasJoined] = useState(false);
     const [isConfirm, setIsConfirm] = useState(false);
 
     useEffect(()=>{
         if(userId && event){
-            if(userId === event.createdBy._id){
-                setShow(true)
-                setHasJoined(false);
-                setIsConfirm(false)
-            }
-
-            for(let i=0;i<event.waitlisted.length;i++){
-                if(userId===event.waitlisted[i].user._id){
+            for(let i=0;i<event?.waitlisted?.length;i++){
+                if(userId===event?.waitlisted[i]?.user?._id){
                     setHasJoined(true);
                     setIsConfirm(false);
                 }
             }
 
-            for(let i=0;i<event.joined.length;i++){
+            for(let i=0;i<event?.joined?.length;i++){
                 if(userId===event.joined[i].user._id){
                     setHasJoined(false);
                     setIsConfirm(true);
@@ -52,19 +45,20 @@ export default function EventDetails(){
 
     return(
         <Box width={"600px"} m={"50px auto"}>
-        <Text fontSize={"3rem"}>{show ? "EVENT" : "Thanks for Joining in"}</Text>
-            <Grid  width={"500px"} m="auto" gap="10px" textAlign={"left"} p="20px" boxShadow="rgba(100, 100,     111, 0.2) 0px 7px 29px 0px" >
-            <Text><AtSignIcon /> {event?.createdBy?.userName}</Text>
+        <Text fontSize={"3rem"}>{userId === event?.createdBy?._id ? "EVENT" : hasJoined ? "Thanks for Joining in" : "Join Event"}</Text>
+            <Grid  width={"500px"} m="auto" gap="10px" textAlign={"left"} p="20px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" >
+            <Flex justifyContent={"space-between"}>
+                <Text> Hosted by, <AtSignIcon /> {event?.createdBy?.userName}</Text>
+                <Text fontWeight={"bold"}>{event?.city}</Text>
+            </Flex>
                 <Image src="https://images.shiksha.com/mediadata/images/articles/1583747992phpzaxKKK.jpeg" />
-                <Flex justifyContent={"space-between"}>
-                    <Text fontWeight={"bold"}>{event?.title}</Text>
-                    <Text>{event?.start}</Text>
-                </Flex>
+                <Text fontWeight={"bold"}>{event?.title}</Text>
+                <Text>Timings : {event?.startDate} at {event?.startTime}</Text>
                 <Text color={"grey"}>{event?.description}</Text>
-                <Text>seats Availale: {event?.limit}</Text>
-                <Text>Event Ends at : {event?.end}</Text>
+                <Text>Seats Availale: {event?.limit}</Text>
+                <Text>Event Ends at : {event?.endDate} - {event?.endTime}</Text>
                 {   
-                    !show && (
+                    userId !== event?.createdBy?._id && (
                         hasJoined ? 
                         <Text border={"1px solid"} p="10px" textAlign={"center"} >You are in waitlist</Text> :
                         isConfirm ? 
@@ -75,14 +69,14 @@ export default function EventDetails(){
                     
             </Grid>
             {
-                show &&
+                userId === event?.createdBy?._id &&
                 <Flex width={"500px"} m="auto" flexDirection={"column"} textAlign="center" p="20px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" >
                 <Text fontSize={"2rem"} textAlign="left" mb={"20px"}>Interested ({event?.waitlisted?.length})</Text>
                     <Grid templateColumns={"repeat(3,1fr)"} gap="20px">
                         {   
                             event?.waitlisted?.map((p)=>(
                                 <Box key={p._id}>
-                                    <Avatar name={p.user.userName} src='https://bit.ly/sage-adebayo' />
+                                    <Avatar name={p?.user?.userName} src='https://bit.ly/sage-adebayo' />
                                     <Text>@{p?.user?.userName}</Text>
                                 </Box>
                             ))
