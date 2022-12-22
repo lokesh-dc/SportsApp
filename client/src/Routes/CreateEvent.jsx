@@ -1,13 +1,15 @@
-import {  Box, Button, Flex, FormLabel, Grid, Input, Select, Text, Textarea } from "@chakra-ui/react";
+import {  Box, Button, Flex, FormLabel, Grid, Input, Select, Text, Textarea, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createEvent } from "../Redux/events/events.actions";
 
 export default function CreateEvent(){
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const toast = useToast();
     const {userId} = useSelector((store)=> store.auth);
-    console.log(userId)
     const [event, setEvent] = useState({createdBy : userId});
 
     function handleData(e){
@@ -24,7 +26,15 @@ export default function CreateEvent(){
     }
 
     function handleSubmit(){
-        dispatch(createEvent(event));
+        dispatch(createEvent(event))
+        toast({
+            title: `Event successfully posted.`,
+            position: 'bottom-right',
+            status: 'success',
+            isClosable: true,
+            duration: 3000,
+          })
+          navigate("/events");
     }
 
     return(
