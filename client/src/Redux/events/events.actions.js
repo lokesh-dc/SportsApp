@@ -11,10 +11,10 @@ import {
 } from "./events.types"
 
 
-export const fetchEvents = ({sort=1, city=""}) => async (dispatch) => {
+export const fetchEvents = ({sort=1, city="", title=""}) => async (dispatch) => {
     dispatch({type: EVENTS_FETCH_LOADING});
     try{
-        const response = await axios.get(`http://localhost:8080/events?sort=${sort}&city=${city}`).then((res)=> res).catch((e)=> e);
+        const response = await axios.get(`http://localhost:8080/events?sort=${sort}&city=${city}&title=${title}`).then((res)=> res).catch((e)=> e);
         dispatch({type: EVENTS_FETCH_SUCCESS, payload: response.data});
     }catch(e){
         dispatch({type: EVENTS_FETCH_ERROR, payload: e.response.data.message});

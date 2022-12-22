@@ -8,12 +8,13 @@ app.get("/", async (req, res)=>{
     const {sort, city} = req.query;
     try{
         let allEvents;
+
         if(city===""){
             allEvents = await eventsModel.find().sort({startDate: sort});
         }
         else
-            allEvents = await eventsModel.find({city}).sort({startDate: sort});
-        
+        allEvents = await eventsModel.find({city}).sort({startDate: sort});
+
         res.send(allEvents);
     }catch(e){
         res.status(500).send(e.message);

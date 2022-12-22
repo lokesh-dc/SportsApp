@@ -16,6 +16,7 @@ export default function EventsPage(){
     const [sort, setSort] = useState(-1);
     const [city, setCity] = useState("");
 
+
     useEffect(()=>{
         dispatch(fetchEvents({sort, city}));
     },[dispatch, sort, city])

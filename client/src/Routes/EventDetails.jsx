@@ -43,8 +43,6 @@ export default function EventDetails(){
         }   
     },[id, userId, event])
 
-    console.log(isConfirm)
-    console.log(event)
 
     return(
         <Box width={"600px"} m={"50px auto"}>

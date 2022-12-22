@@ -9,7 +9,8 @@ export default function EventsCard({event, loading}){
     return(
         <Skeleton isLoaded={!loading}>
             <Flex flexDirection={"column"} border="1px solid rgba(180,180,180,0.5)" gap={"10px"} p="10px">
-                <Img src="https://images.shiksha.com/mediadata/images/articles/1583747992phpzaxKKK.jpeg" w={"100%"} />
+                    <Img src="https://images.shiksha.com/mediadata/images/articles/1583747992phpzaxKKK.jpeg" w={"100%"} />
+                    <Text textAlign={"right"}>{event.city}</Text>
                     <Text fontWeight={"bold"} fontSize="1.2rem">{event.title}</Text>
                     <Text>{event?.startDate} - {event?.startTime} </Text>
                     <Text color={"grey"}>{event.description}</Text>
