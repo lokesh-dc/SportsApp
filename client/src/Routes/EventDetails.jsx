@@ -43,6 +43,9 @@ export default function EventDetails(){
         }   
     },[id, userId, event])
 
+    console.log(isConfirm)
+    console.log(event)
+
     return(
         <Box width={"600px"} m={"50px auto"}>
         <Text fontSize={"3rem"}>{userId === event?.createdBy?._id ? "EVENT" : hasJoined ? "Thanks for Joining in" : "Join Event"}</Text>

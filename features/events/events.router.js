@@ -40,6 +40,11 @@ app.get("/:id", async(req,res)=>{
             populate : [
                 { path : "user" }
             ]
+        }).populate({
+            path : "joined",
+            populate : [
+                { path : "user" }
+            ]
         })
         res.send(eventDetails)
     }catch(e){
@@ -52,9 +57,16 @@ app.patch("/:id", async (req,res)=>{
     let {userId} = req.body;
     try{
         let event = await eventsModel.findById(id);
-        let waitlist = event.waitlisted;
-        waitlist.push({user: userId})
-        await eventsModel.findByIdAndUpdate(id, {waitlisted: waitlist});
+        if(event.limit===0){
+            let waitlist = event.waitlisted;
+            waitlist.push({user: userId})
+            await eventsModel.findByIdAndUpdate(id, {waitlisted: waitlist});
+        }else{
+            let joined = event.joined;
+            joined.push({user:userId});
+            await eventsModel.findByIdAndUpdate(id, {joined: joined});
+            await eventsModel.findByIdAndUpdate(id, {limit: event.limit-1});
+        }
         res.send("updated")
     }catch(e){
         res.status(500).send(e.message);
