@@ -16,6 +16,7 @@ app.get("/", async (req, res)=>{
 
 app.post("/", async (req, res)=>{
     let {createdBy,title, start,end, description, limit, joined  } = req.body;
+    limit = +limit;
     try{
         await eventsModel.create({createdBy,title, start,end, limit, description, joined});
         res.send("Event successfully created");
@@ -27,7 +28,7 @@ app.post("/", async (req, res)=>{
 app.get("/:id", async(req,res)=>{
     let {id} = req.params;
     try{
-        let eventDetails = await eventsModel.findById(id).populate({
+        let eventDetails = await eventsModel.findById(id).populate({path:'createdBy'}).populate({
             path : "waitlisted",
             populate : [
                 { path : "user" }

@@ -6,8 +6,9 @@ import { createEvent } from "../Redux/events/events.actions";
 export default function CreateEvent(){
 
     const dispatch = useDispatch();
-    const {userDetails} = useSelector((store)=> store.auth);
-    const [event, setEvent] = useState({createdBy : userDetails.userName});
+    const {userId} = useSelector((store)=> store.auth);
+    console.log(userId)
+    const [event, setEvent] = useState({createdBy : userId});
 
     function handleData(e){
         const {name, value} = e.target;
@@ -18,7 +19,7 @@ export default function CreateEvent(){
         dispatch(createEvent(event));
     }
 
-    console.log(Event)
+    console.log(event)
 
     return(
         <Flex flexDirection={"column"} w="600px" m={"50px auto"} gap="20px" > 

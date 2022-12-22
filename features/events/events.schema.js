@@ -15,7 +15,7 @@ let eventsSchema = new mongoose.Schema({
     end : {type: String},
     joined : {type: [joinedUserSchema]},
     waitlisted : {type : [joinedUserSchema]},
-    createdBy : {type: String}
+    createdBy : {type:  mongoose.Schema.ObjectId, ref: 'user',}
 })
 
 let eventsModel = mongoose.model("event",eventsSchema);
