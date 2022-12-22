@@ -34,7 +34,9 @@ export default function CreateEvent(){
             isClosable: true,
             duration: 3000,
           })
-          navigate("/events");
+          setTimeout(()=>{
+              navigate("/events");
+          },1000)
     }
 
     return(
