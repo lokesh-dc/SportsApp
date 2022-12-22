@@ -74,6 +74,18 @@ export default function EventDetails(){
             {
                 userId === event?.createdBy?._id &&
                 <Flex width={"500px"} m="auto" flexDirection={"column"} textAlign="center" p="20px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" >
+                <Text fontSize={"2rem"} textAlign="left" mb={"20px"}>Joined Event ({event?.joined?.length})</Text>
+                <Grid templateColumns={"repeat(3,1fr)"} gap="20px">
+                    {   
+                        event?.joined?.map((p)=>(
+                            <Box key={p._id}>
+                                <Avatar name={p?.user?.userName} src='https://bit.ly/sage-adebayo' />
+                                <Text>@{p?.user?.userName}</Text>
+                            </Box>
+                        ))
+                    }
+                </Grid>
+
                 <Text fontSize={"2rem"} textAlign="left" mb={"20px"}>Interested ({event?.waitlisted?.length})</Text>
                     <Grid templateColumns={"repeat(3,1fr)"} gap="20px">
                         {   
@@ -85,6 +97,7 @@ export default function EventDetails(){
                             ))
                         }
                     </Grid>
+
                 </Flex>
 
             }
